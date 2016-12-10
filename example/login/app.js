@@ -6,7 +6,7 @@ var cookieParser = require('cookie-parser');
 var session = require('cookie-session');
 var bodyParser = require('body-parser');
 
-var mongoose = require('mongoose');
+var camo = require('camo');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 
@@ -30,19 +30,18 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Configure passport-local to use account model for authentication
-var Account = require('./models/account');
-passport.use(new LocalStrategy(Account.authenticate()));
-
-passport.serializeUser(Account.serializeUser());
-passport.deserializeUser(Account.deserializeUser());
-
 // Connect mongoose
-mongoose.connect('mongodb://localhost/passport_local_mongoose_examples', function(err) {
-  if (err) {
+camo.connect('mongodb://localhost/passport_local_camo_examples').then((db) => {}, (e) => {
+  if (e) {
     console.log('Could not connect to mongodb on localhost. Ensure that you have mongodb running on localhost and mongodb accepts connections on standard ports!');
   }
 });
+
+// Configure passport-local to use account model for authentication
+const Account = require('./models/Account');
+passport.serializeUser(Account.serialize);
+passport.deserializeUser(Account.deserialize);
+passport.use(new LocalStrategy(Account.authenticate));
 
 // Register routes
 app.use('/', require('./routes'));
