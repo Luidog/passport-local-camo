@@ -30,7 +30,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Connect mongoose
+// Connect camo
 camo.connect('mongodb://localhost/passport_local_camo_examples').then((db) => {}, (e) => {
   if (e) {
     console.log('Could not connect to mongodb on localhost. Ensure that you have mongodb running on localhost and mongodb accepts connections on standard ports!');

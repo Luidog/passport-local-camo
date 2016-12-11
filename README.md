@@ -74,7 +74,7 @@ For complete example of implementing a registration, login and logout see [here]
 ### Instance methods
 
 #### async setPasshash(password) 
-set a user's password. ***must be called at least one upon creation of new user!***
+set a user's password. ***must be called at least once upon creation of new user, if using `Account.create()`***
 
 #### async checkPasshash(password)
 directly check whether passed password is correct or not
@@ -86,12 +86,12 @@ get clean user object (JSON without passhash and methods)
 Static methods are exposed on the schema. For example to use `register` function use
 
     var User = require('./models/User');
-    User.register(opts);
+    await User.register(opts);
 
 * `authenticate (username, passhash, done)`: function that is used in Passport's LocalStrategy
 * `serialize (user, done)`: function that is used by Passport to serialize users into the session
-* `deserialize (primaryKey, done)`: function that is used by Passport to deserialize users into the session
-* async `register (user || username, password)`: Convenience method to register a new user instance with a given password. Checks if username is unique. See [example](https://github.com/perimetral/passport-local-camo/tree/master/example).
+* `deserialize (primaryKey, done)`: function that is used by Passport to deserialize users from the session
+* async `register (user || username, password)`: method to register a new user instance with a given password. Checks if username is unique. See [example](https://github.com/perimetral/passport-local-camo/tree/master/example).
 
 ## License
 Passport-Local Camo is licensed under the [0BSD license](https://opensource.org/licenses/FPL-1.0.0).
