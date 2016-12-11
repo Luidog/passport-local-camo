@@ -1,4 +1,4 @@
-# Passport-Local Camo
+# Passport-Local Camo [![npm version](https://badge.fury.io/js/passport-local-camo.svg)](https://badge.fury.io/js/passport-local-camo)
 Passport-Local Camo is a [Camo](https://github.com/scottwrobinson/camo) plugin that simplifies building username and password login with [Passport](http://passportjs.org).
 
 ## Installation
