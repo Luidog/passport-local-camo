@@ -1,3 +1,4 @@
+const crypto = require('crypto');
 const modelBuilder = require('passport-local-camo');
 
 const Account = modelBuilder({
