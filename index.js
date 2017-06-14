@@ -48,8 +48,20 @@ const modelConstructor = (options = {}) => {
 		}
 
 		async dump () {
-			try { let tmp = Object.assign({}, this); delete tmp[options.passwordKey]; return tmp; } catch (e) {};
-			try { return Object.assign({}, this, { [options.passwordKey]: undefined }); } catch (e) { return this; };
+			try {
+				let tmp = Object.assign({}, this);
+				delete tmp[options.passwordKey];
+				delete tmp._schema;
+				delete tmp._id;
+				return tmp;
+			} catch (e) {};
+			try {
+				return Object.assign({}, this, {
+					[options.passwordKey]: undefined,
+					_schema: undefined,
+					_id: undefined
+				});
+			} catch (e) { return this; };
 		}
 
 

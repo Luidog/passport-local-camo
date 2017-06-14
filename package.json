@@ -1,7 +1,7 @@
 {
   "name": "passport-local-camo",
   "description": "Camo plugin that simplifies building username and password login with Passport",
-  "version": "1.0.0c",
+  "version": "1.0.1",
   "main": "index.js",
   "repository": "perimetral/passport-local-camo",
   "author": "perimetral <themtrx@protonmail.com>",
