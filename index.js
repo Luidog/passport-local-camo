@@ -48,11 +48,10 @@ const modelConstructor = (options = {}) => {
 		}
 
 		async dump () {
-			return {
-				[options.primaryKey]: this[options.primaryKey],
-				[options.usernameKey]: this[options.usernameKey]
-			};
+			try { let tmp = Object.assign({}, this); delete tmp[options.passwordKey]; return tmp; } catch (e) {};
+			try { return Object.assign({}, this, { [options.passwordKey]: undefined }); } catch (e) { return this; };
 		}
+
 
 		static serialize (user, done) {
 			done(null, user[options.primaryKey]);
