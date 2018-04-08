@@ -1,33 +1,46 @@
 {
-  "name": "passport-local-camo",
+  "name": "passport-local-marpat",
   "description":
-    "Camo plugin that simplifies building username and password login with Passport",
+    "marpat account plugin that simplifies building username and password login with Passport",
   "version": "1.1.0",
   "main": "index.js",
-  "repository": "perimetral/passport-local-camo",
-  "author": "perimetral <themtrx@protonmail.com>",
-  "license": "0BSD",
-  "keywords": ["camo", "passport", "authentication", "login"],
+  "repository": {
+    "type": "git",
+    "url": "git+https://Luidog@github.com/Luidog/passport-local-marpat.git"
+  },
+  "author": "Lui de la Parra",
+  "bugs": {
+    "url": "https://github.com/Luidog/passport-local-marpat/issues"
+  },
+  "homepage": "https://github.com/Luidog/passport-local-marpat#readme",
+  "license": "MIT",
+  "keywords": ["marpat", "passport", "authentication", "login"],
   "engines": {
     "node": ">= 7.2"
   },
   "dependencies": {
-    "camo": "*",
+    "marpat": "*",
     "passport-local": "^1.0.0"
   },
   "devDependencies": {
-    "chai": "^3.2.0",
-    "coveralls": "^2.11.9",
-    "cross-env": "^2.0.0",
-    "istanbul": "^0.4.3",
     "mocha": "^2.3.2",
-    "mocha-lcov-reporter": "^1.2.0",
-    "camo": "*",
-    "shelljs": "^0.7.0"
+    "chai": "^4.1.2",
+    "chai-as-promised": "^7.1.1",
+    "eslint": "^4.11.0",
+    "eslint-config-google": "^0.9.1",
+    "eslint-config-prettier": "^2.7.0",
+    "eslint-plugin-prettier": "^2.3.1",
+    "jsdocs": "^1.0.0",
+    "minami": "^1.2.3",
+    "mocha": "^5.0.4",
+    "package-json-to-readme": "^2.1.1",
+    "prettier": "^1.8.2",
+    "varium": "^1.0.1"
   },
   "scripts": {
-    "test": "cross-env NODE_ENV=test mocha -R spec test/",
-    "cover":
-      "cross-env NODE_ENV=test istanbul cover ./node_modules/mocha/bin/_mocha --report html -- -R spec"
+    "test": "node_modules/mocha --recursive ./tests",
+    "generate-readme":
+      "node_modules/.bin/readme package.json --tests --travis > README.md",
+    "generate-docs": "node_modules/.bin/jsdoc --configure .jsdoc.js --verbose"
   }
 }
