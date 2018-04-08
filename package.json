@@ -1,17 +1,13 @@
 {
   "name": "passport-local-camo",
-  "description": "Camo plugin that simplifies building username and password login with Passport",
-  "version": "1.0.1",
+  "description":
+    "Camo plugin that simplifies building username and password login with Passport",
+  "version": "1.1.0",
   "main": "index.js",
   "repository": "perimetral/passport-local-camo",
   "author": "perimetral <themtrx@protonmail.com>",
   "license": "0BSD",
-  "keywords": [
-    "camo",
-    "passport",
-    "authentication",
-    "login"
-  ],
+  "keywords": ["camo", "passport", "authentication", "login"],
   "engines": {
     "node": ">= 7.2"
   },
@@ -31,6 +27,7 @@
   },
   "scripts": {
     "test": "cross-env NODE_ENV=test mocha -R spec test/",
-    "cover": "cross-env NODE_ENV=test istanbul cover ./node_modules/mocha/bin/_mocha --report html -- -R spec"
+    "cover":
+      "cross-env NODE_ENV=test istanbul cover ./node_modules/mocha/bin/_mocha --report html -- -R spec"
   }
 }
