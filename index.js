@@ -46,10 +46,7 @@ const modelConstructor = (options = {}) => {
 		}
 
 		async checkHash(data) {
-			return (
-				(await options.hashGenerater(data)) ===
-				this[options.passwordKey]
-			);
+			return (await options.hashGenerater(data)) === this[options.passwordKey];
 		}
 
 		async dump() {
@@ -86,26 +83,27 @@ const modelConstructor = (options = {}) => {
 			);
 		}
 
+		static resetPassword(current, change) {
+			return new Promise((resolve, reject) => {
+				if (this.checkHash(current)) {
+					this.createHash(change);
+					resolve(this.dump());
+				} else {
+					reject({ message: 'Current password is not correct' });
+				}
+			});
+		}
+
 		static authenticate(name, hash, done) {
 			this.findOne({ [options.usernameKey]: name }).then(
 				async user => {
 					if (!user)
-						return done(
-							null,
-							false,
-							new Error(options.E_USER_NOT_FOUND)
-						);
-					if (await user.checkHash(hash))
-						return done(null, await user.dump());
-					else
-						return done(
-							null,
-							false,
-							new Error(options.E_INVALID_PASS)
-						);
+						return done(null, false, new Error(options.E_USER_NOT_FOUND));
+					if (await user.checkHash(hash)) return done(null, await user.dump());
+					else return done(null, false, new Error(options.E_INVALID_PASS));
 				},
-				e => {
-					return done(e);
+				error => {
+					return done(error);
 				}
 			);
 		}
@@ -115,7 +113,7 @@ const modelConstructor = (options = {}) => {
 				username instanceof Account
 					? username
 					: this.create({ [options.usernameKey]: username });
-			await this.createHash(passhash);
+			await user.createHash(passhash);
 			return user;
 		}
 	}
