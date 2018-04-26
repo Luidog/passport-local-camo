@@ -1,5 +1,5 @@
 # Passport-Local marpat [![npm version](https://badge.fury.io/js/passport-local-marpat.svg)](https://badge.fury.io/js/passport-local-marpat)
-Passport-Local marpat is a [marpat](https://github.com/scottwrobinson/marpat) plugin that simplifies building username and password login with [Passport](http://passportjs.org).
+Passport-Local marpat is a [marpat](https://github.com/luidog/marpat) plugin that simplifies building username and password login with [Passport](http://passportjs.org).
 
 ## Installation
 
@@ -92,6 +92,7 @@ Static methods are exposed on the schema. For example to use `register` function
 * `serialize (user, done)`: function that is used by Passport to serialize users into the session
 * `deserialize (primaryKey, done)`: function that is used by Passport to deserialize users from the session
 * async `register (user || username, password)`: method to register a new user instance with a given password. Checks if username is unique. 
+* Promise `resetPassword (current, new)`: method that checks the current password against the hash and if successful - creates and saves a hash using the new password.
 
 ## License
 Passport-Local marpat is licensed under the MIT License. See LICENSE.md
