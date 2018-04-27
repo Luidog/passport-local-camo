@@ -1,6 +1,7 @@
 {
   "name": "passport-local-marpat",
-  "description": "marpat account plugin that simplifies building username and password login with Passport",
+  "description":
+    "marpat account plugin that simplifies building username and password login with Passport",
   "version": "1.2.0",
   "main": "index.js",
   "repository": {
@@ -13,12 +14,7 @@
   },
   "homepage": "https://github.com/Luidog/passport-local-marpat#readme",
   "license": "MIT",
-  "keywords": [
-    "marpat",
-    "passport",
-    "authentication",
-    "login"
-  ],
+  "keywords": ["marpat", "passport", "authentication", "login"],
   "engines": {
     "node": ">= 7.2"
   },
@@ -46,8 +42,10 @@
     "varium": "^1.0.1"
   },
   "scripts": {
+    "test": "node example",
     "test": "node_modules/mocha --recursive ./tests",
-    "generate-readme": "node_modules/.bin/readme package.json --tests --travis > README.md",
+    "generate-readme":
+      "node_modules/.bin/readme package.json --tests --travis > README.md",
     "generate-docs": "node_modules/.bin/jsdoc --configure .jsdoc.js --verbose"
   }
 }
