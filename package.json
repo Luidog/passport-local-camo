@@ -2,7 +2,7 @@
   "name": "passport-local-marpat",
   "description":
     "marpat account plugin that simplifies building username and password login with Passport",
-  "version": "1.2.0",
+  "version": "2.0.0",
   "main": "index.js",
   "repository": {
     "type": "git",
