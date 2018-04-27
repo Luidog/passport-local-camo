@@ -42,7 +42,7 @@
     "varium": "^1.0.1"
   },
   "scripts": {
-    "test": "node example",
+    "example": "node example",
     "test": "node_modules/mocha --recursive ./tests",
     "generate-readme":
       "node_modules/.bin/readme package.json --tests --travis > README.md",

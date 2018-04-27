@@ -6,7 +6,7 @@ const cryptoRandomString = require('crypto-random-string');
 const { Document } = require('marpat');
 
 let defaults = {
-  primaryKey: 'uId',
+  primaryKey: 'uid',
   usernameKey: 'name',
   passwordKey: 'hash',
   primaryKeyGenerator: () => uuidv4(),
