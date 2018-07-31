@@ -120,13 +120,12 @@ const modelConstructor = (options = {}) => {
     }
 
     resetPassword(current, change) {
-      return new Promise((resolve, reject) => {
-        if (this.checkHash(current)) {
-          resolve(this.saveHash(change));
-        } else {
-          reject(options.E_INVALID_PASS);
-        }
-      });
+      return this.checkHash(current).then(
+        valid =>
+          valid
+            ? Promise.resolve(this.saveHash(change))
+            : Promise.reject(options.E_INVALID_PASS)
+      );
     }
 
     static authenticate(username, password, done) {
