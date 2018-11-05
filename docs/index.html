@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Home - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <li class="nav-link nav-home-link"><a href="index.html">Home</a></li>
+</nav>
+
+<div id="main">
+    
+
+    
+
+
+
+    
+
+
+
+
+
+
+
+
+
+    
+
+
+    <section class="readme">
+        <article><!--@h1([pkg.name])-->
+<h1>passport-local-marpat</h1><!--/@-->
+<p><a href="https://badge.fury.io/js/passport-local-marpat"><img src="https://badge.fury.io/js/passport-local-marpat.svg" alt="npm version"></a></p>
+<p>passport-local-marpat is a <a href="https://github.com/luidog/marpat">marpat</a> plugin that simplifies building username and password login with <a href="http://passportjs.org">Passport</a>.</p>
+<!--@installation()-->
+<h2>Installation</h2><pre class="prettyprint source lang-sh"><code>npm install --save passport-local-marpat</code></pre><!--/@-->
+<p>passport-local-marpat does not require <code>passport</code> or <code>passport-local</code> dependencies directly but expects you to have these dependencies installed.</p>
+<pre class="prettyprint source"><code>$ npm i --save passport passport-local passport-local-marpat</code></pre><h2>Usage</h2><h3>Model passport-local-marpat</h3><p>First you need to instantiate from passport-local-marpat into your own User model</p>
+<pre class="prettyprint source"><code>const modelBuilder = require('passport-local-marpat');
+const Account = modelBuilder();
+
+module.exports = Account;</code></pre><p>You're free to define your User how you like by extending <code>Account</code> class. passport-local-marpat will add custom fields to store username and hashed password.</p>
+<p>Additionally passport-local-marpat adds some methods to your Schema. See the API Documentation section for more details.</p>
+<h3>Configure Passport/Passport-Local</h3><p>You should configure Passport/Passport-Local as described in <a href="http://passportjs.org/guide/configure/">the Passport Guide</a>.</p>
+<p>passport-local-marpat supports this setup by implementing a <code>LocalStrategy</code> and <code>serialize</code>/<code>deserialize</code> functions.</p>
+<p>To setup passport-local-marpat use this code</p>
+<pre class="prettyprint source"><code>// requires the model built by passport-local-marpat or one extended from it
+var User = require('./models/User');
+
+// use static serialize and deserialize of model for passport session support
+passport.serializeUser(User.serialize);
+passport.deserializeUser(User.deserialize);
+
+// use static authenticate method of model in LocalStrategy
+passport.use(new LocalStrategy(User.authenticate));</code></pre><p>Make sure that you have a marpat connected to mongodb or nedb and you're done.</p>
+<h3>Options</h3><p>passport-local-marpat additional options can be passed to model builder to configure process.</p>
+<pre class="prettyprint source"><code>//  models/User.js
+const Account = modelBuilder(options);</code></pre><p><code>options</code> is object. Each field is optional. Here are defaults for each field.</p>
+<p><strong>Main Options</strong></p>
+<ul>
+<li><code>primaryKey</code>: represents field name for primary key. Default is <code>uid</code></li>
+<li><code>usernameKey</code>: represents field name for username. Default is <code>username</code></li>
+<li><code>passwordKey</code>: represents field name for pass. Default is <code>passhash</code></li>
+<li><code>primaryKeyGen</code>: sync function which is used to generate random primary key. Must take 2 args:</li>
+<li><ul>
+<li>[<code>length</code>]&#x3A; length of generated key. Default is <code>64</code></li>
+</ul>
+</li>
+<li><ul>
+<li>[<code>encoding</code>]&#x3A; encoding of generated key. Default is <code>hex</code></li>
+</ul>
+</li>
+<li><code>hashGen</code>: <strong>async</strong> function which is used to hash password.</li>
+<li><ul>
+<li>&lt;<code>data</code>&gt;: data to be hashed</li>
+</ul>
+</li>
+<li><ul>
+<li>[<code>algorithm</code>]&#x3A; algorithm used for hashing. Default is <code>whirlpool</code></li>
+</ul>
+</li>
+<li><ul>
+<li>[<code>encoding</code>]&#x3A; encoding of resulting hash. Default is <code>hex</code></li>
+</ul>
+</li>
+<li><code>E_USER_NOT_FOUND</code>, <code>E_INVALID_PASS</code>: error text accordingly</li>
+</ul>
+<h3>Examples</h3><p>For complete example of implementing a registration and authentication see <a href="https://github.com/luidog/passport-local-marpat/tree/master/example">here</a>.</p>
+<h2>API Documentation</h2><h3>Instance methods</h3><h4>savehash(password)</h4><p>set a user's password. <strong><em>must be called at least once upon creation of new user, if using <code>Account.create()</code></em></strong></p>
+<h4>checkHash(password)</h4><p>directly check whether passed password is correct or not</p>
+<h4>dump()</h4><p>get clean user object (JSON without passhash and methods)</p>
+<h3>Static methods</h3><p>Static methods are exposed on the schema. For example to use <code>register</code> function use</p>
+<pre class="prettyprint source"><code>var User = require('./models/User');
+await User.register(opts);</code></pre><ul>
+<li><code>authenticate (username, passhash, done)</code>: function that is used in Passport's LocalStrategy</li>
+<li><code>serialize (user, done)</code>: function that is used by Passport to serialize users into the session</li>
+<li><code>deserialize (primaryKey, done)</code>: function that is used by Passport to deserialize users from the session</li>
+<li>Promise <code>register (user || username, password)</code>: method to register a new user instance with a given password. Checks if username is unique.</li>
+<li>Promise <code>resetPassword (current, new)</code>: method that checks the current password against the hash and if successful - creates and saves a hash using the new password.</li>
+</ul>
+<!--@execute('npm run test',[])-->
+<pre class="prettyprint source lang-default"><code>> passport-local-marpat@3.0.0 test /Users/luidelaparra/Documents/Development/passport-local-marpat
+> nyc _mocha --recursive  ./tests --timeout=30000 --exit
+
+
+
+  Account Capabilities
+    Account Registration Capabilities
+      ✓ should allow an account to be registered (1015ms)
+      ✓ should allow an account to register twice (1000ms)
+      ✓ should reject if no account key is given (1001ms)
+      ✓ should reject if no password is given
+    Account Authentication Capabilities
+      ✓ should allow a user to authenticate (1002ms)
+      ✓ should reject if no password is given
+      ✓ should reject if the wrong password is given (1007ms)
+      ✓ should reject if the wrong account is given
+    Password Reset Capabilities
+      ✓ should allow passwords to be reset (2012ms)
+      ✓ should reject if the current password is incorrect (1007ms)
+
+  Account Capabilities
+    ✓ should allow a class to be created with no options (1018ms)
+    ✓ should reject generating a hash if there is no password to hash
+
+  Passport Capabilities
+    ✓ should serialize an account
+    ✓ should deserialize an account
+    ✓ should return false if there is no account to deserialize
+
+  Storage Capabilities
+    ✓ should allow an instance to be created
+    ✓ should allow an instance to be saved.
+    ✓ should allow an instance to be recalled
+    ✓ should allow instances to be listed
+    ✓ should allow you to remove an instance
+
+
+  20 passing (12s)
+
+-----------------------------------|----------|----------|----------|----------|-------------------|
+File                               |  % Stmts | % Branch |  % Funcs |  % Lines | Uncovered Line #s |
+-----------------------------------|----------|----------|----------|----------|-------------------|
+All files                          |      100 |      100 |      100 |      100 |                   |
+ passport-local-marpat             |      100 |      100 |      100 |      100 |                   |
+  index.js                         |      100 |      100 |      100 |      100 |                   |
+ passport-local-marpat/tests/mocks |      100 |      100 |      100 |      100 |                   |
+  index.js                         |      100 |      100 |      100 |      100 |                   |
+-----------------------------------|----------|----------|----------|----------|-------------------|</code></pre><!--/@-->
+<!--@dependencies()-->
+<h2><a name="dependencies">Dependencies</a></h2><ul>
+<li><a href="https://github.com/sindresorhus/crypto-random-string">crypto-random-string</a>: Generate a cryptographically strong random string</li>
+<li><a href="https://github.com/luidog/marpat">marpat</a>: A class-based ES6 ODM for Mongo-like databases.</li>
+<li><a href="https://github.com/kelektiv/node-uuid">uuid</a>: RFC4122 (v1, v4, and v5) UUIDs</li>
+</ul>
+<!--/@-->
+<!--@devDependencies()-->
+<h2><a name="dev-dependencies">Dev Dependencies</a></h2><ul>
+<li><a href="https://github.com/expressjs/body-parser">body-parser</a>: Node.js body parsing middleware</li>
+<li><a href="https://github.com/chaijs/chai">chai</a>: BDD/TDD assertion library for node.js and the browser. Test framework agnostic.</li>
+<li><a href="https://github.com/domenic/chai-as-promised">chai-as-promised</a>: Extends Chai with assertions about promises.</li>
+<li><a href="https://github.com/nickmerwin/node-coveralls">coveralls</a>: takes json-cov output into stdin and POSTs to coveralls.io</li>
+<li><a href="https://github.com/motdotla/dotenv">dotenv</a>: Loads environment variables from .env file</li>
+<li><a href="https://github.com/eslint/eslint">eslint</a>: An AST-based pattern checker for JavaScript.</li>
+<li><a href="https://github.com/google/eslint-config-google">eslint-config-google</a>: ESLint shareable config for the Google style</li>
+<li><a href="https://github.com/prettier/eslint-config-prettier">eslint-config-prettier</a>: Turns off all rules that are unnecessary or might conflict with Prettier.</li>
+<li><a href="https://github.com/prettier/eslint-plugin-prettier">eslint-plugin-prettier</a>: Runs prettier as an eslint rule</li>
+<li><a href="https://github.com/expressjs/express">express</a>: Fast, unopinionated, minimalist web framework</li>
+<li><a href="https://github.com/jsdoc3/jsdoc">jsdoc</a>: An API documentation generator for JavaScript.</li>
+<li><a href="https://github.com/Nijikokun/minami">minami</a>: Clean and minimal JSDoc 3 Template / Theme</li>
+<li><a href="https://github.com/mochajs/mocha">mocha</a>: simple, flexible, fun test framework</li>
+<li><a href="https://github.com/StevenLooman/mocha-lcov-reporter">mocha-lcov-reporter</a>: LCOV reporter for Mocha</li>
+<li><a href="https://github.com/mosjs/mos">mos</a>: A pluggable module that injects content into your markdown files via hidden JavaScript snippets</li>
+<li><a href="https://github.com/mosjs/mos/tree/master/packages/mos-plugin-dependencies">mos-plugin-dependencies</a>: A mos plugin that creates dependencies sections</li>
+<li><a href="https://github.com/team-767/mos-plugin-execute">mos-plugin-execute</a>: Mos plugin to inline a process output</li>
+<li><a href="https://github.com/mosjs/mos/tree/master/packages/mos-plugin-installation">mos-plugin-installation</a>: A mos plugin for creating installation section</li>
+<li><a href="https://github.com/mosjs/mos-plugin-license">mos-plugin-license</a>: A mos plugin for generating a license section</li>
+<li><a href="https://github.com/mosjs/mos/tree/master/packages/mos-plugin-snippet">mos-plugin-snippet</a>: A mos plugin for embedding snippets from files</li>
+<li><a href="https://github.com/istanbuljs/nyc">nyc</a>: the Istanbul command line interface</li>
+<li><a href="https://github.com/jaredhanson/passport">passport</a>: Simple, unobtrusive authentication for Node.js.</li>
+<li><a href="https://github.com/jaredhanson/passport-local">passport-local</a>: Local username and password authentication strategy for Passport.</li>
+<li><a href="https://github.com/prettier/prettier">prettier</a>: Prettier is an opinionated code formatter</li>
+<li><a href="https://npmjs.org/package/varium">varium</a>: A strict parser and validator of environment config variables</li>
+</ul>
+<!--/@-->
+<!--@license()-->
+<h2>License</h2><p>MIT © Lui de la Parra
+<!--/@--></p></article>
+    </section>
+
+
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sun Nov 04 2018 20:33:13 GMT-0800 (PST) using the Minami theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>

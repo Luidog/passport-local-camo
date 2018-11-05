@@ -24,6 +24,11 @@
     "marpat": "~1.18.2",
     "uuid": "^3.3.2"
   },
+    "mos": {
+    "plugins": [
+      "execute"
+    ]
+  },
   "devDependencies": {
     "body-parser": "^1.18.3",
     "chai": "^4.2.0",
@@ -55,7 +60,7 @@
     "test": "nyc _mocha --recursive  ./tests --timeout=30000 --exit",
     "report": "nyc report --reporter=html",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
-    "generate-docs": "RESULTS=true node examples/index.js  && mos && node_modules/.bin/jsdoc --configure .jsdoc.js --verbose",
+    "generate-docs": "mos && node_modules/.bin/jsdoc --configure .jsdoc.js --verbose",
     "examples": "node examples/index.js"
   }
 }
