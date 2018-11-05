@@ -2,8 +2,7 @@
 # passport-local-marpat
 <!--/@-->
 
- 
-[![npm version](https://badge.fury.io/js/passport-local-marpat.svg)](https://badge.fury.io/js/passport-local-marpat)
+[![Build Status](https://travis-ci.com/Luidog/passport-local-marpat.svg?branch=master)](https://travis-ci.com/Luidog/passport-local-marpat)[![npm version](https://badge.fury.io/js/passport-local-marpat.svg)](https://badge.fury.io/js/passport-local-marpat)[![Known Vulnerabilities](https://snyk.io/test/github/Luidog/passport-local-marpat/badge.svg?targetFile=package.json)](https://snyk.io/test/github/Luidog/passport-local-marpat?targetFile=package.json)[![Coverage Status](https://coveralls.io/repos/github/Luidog/passport-local-marpat/badge.svg?branch=master)](https://coveralls.io/github/Luidog/passport-local-marpat?branch=master)
 
 passport-local-marpat is a [marpat](https://github.com/luidog/marpat) plugin that simplifies building username and password login with [Passport](http://passportjs.org).
 
