@@ -2,7 +2,7 @@
 # passport-local-marpat
 <!--/@-->
 
-[![Build Status](https://travis-ci.com/Luidog/passport-local-marpat.svg?branch=master)](https://travis-ci.com/Luidog/passport-local-marpat)[![npm version](https://badge.fury.io/js/passport-local-marpat.svg)](https://badge.fury.io/js/passport-local-marpat)[![Known Vulnerabilities](https://snyk.io/test/github/Luidog/passport-local-marpat/badge.svg?targetFile=package.json)](https://snyk.io/test/github/Luidog/passport-local-marpat?targetFile=package.json)[![Coverage Status](https://coveralls.io/repos/github/Luidog/passport-local-marpat/badge.svg?branch=master)](https://coveralls.io/github/Luidog/passport-local-marpat?branch=master)
+[![Build Status](https://travis-ci.com/Luidog/passport-local-marpat.svg?branch=master)](https://travis-ci.com/Luidog/passport-local-marpat) [![Coverage Status](https://coveralls.io/repos/github/Luidog/passport-local-marpat/badge.svg?branch=master)](https://coveralls.io/github/Luidog/passport-local-marpat?branch=master) [![Known Vulnerabilities](https://snyk.io/test/github/Luidog/passport-local-marpat/badge.svg?targetFile=package.json)](https://snyk.io/test/github/Luidog/passport-local-marpat?targetFile=package.json) [![npm version](https://badge.fury.io/js/passport-local-marpat.svg)](https://badge.fury.io/js/passport-local-marpat) [![GitHub license](https://img.shields.io/github/license/Luidog/passport-local-marpat.svg)](https://github.com/Luidog/passport-local-marpat/blob/master/LICENSE.md)
 
 passport-local-marpat is a [marpat](https://github.com/luidog/marpat) plugin that simplifies building username and password login with [Passport](http://passportjs.org).
 
