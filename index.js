@@ -63,10 +63,7 @@ const modelConstructor = (options = {}) => {
           this.iterations,
           this.hashBytes,
           this.digest,
-          (error, hash) => {
-            if (error) reject(error);
-            resolve(hash.toString('hex'));
-          }
+          (error, hash) => resolve(hash.toString('hex'))
         )
       );
     }
@@ -87,26 +84,15 @@ const modelConstructor = (options = {}) => {
     }
 
     dump() {
-      try {
-        let tmp = Object.assign({}, this);
-        delete tmp[options.passwordKey];
-        delete tmp._schema;
-        delete tmp.salt;
-        delete tmp.iterations;
-        delete tmp.hashBytes;
-        delete tmp._id;
-        delete tmp.digest;
-        return tmp;
-      } catch (error) {}
-      try {
-        return Object.assign({}, this, {
-          [options.passwordKey]: undefined,
-          _schema: undefined,
-          _id: undefined
-        });
-      } catch (error) {
-        return this;
-      }
+      let tmp = Object.assign({}, this);
+      delete tmp[options.passwordKey];
+      delete tmp._schema;
+      delete tmp.salt;
+      delete tmp.iterations;
+      delete tmp.hashBytes;
+      delete tmp._id;
+      delete tmp.digest;
+      return tmp;
     }
 
     static serialize(user, done) {
@@ -114,9 +100,9 @@ const modelConstructor = (options = {}) => {
     }
 
     static deserialize(primaryKey, done) {
-      this.findOne({ [options.primaryKey]: primaryKey })
-        .then(user => done(null, user))
-        .catch(error => done(error, false));
+      this.findOne({ [options.primaryKey]: primaryKey }).then(
+        user => (user ? done(null, user) : done(null, false))
+      );
     }
 
     resetPassword(current, change) {
