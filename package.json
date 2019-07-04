@@ -22,9 +22,10 @@
   "dependencies": {
     "crypto-random-string": "^1.0.0",
     "marpat": "~1.18.2",
-    "uuid": "^3.3.2"
+    "uuid": "^3.3.2",
+    "snyk": "^1.189.0"
   },
-    "mos": {
+  "mos": {
     "plugins": [
       "execute"
     ]
@@ -61,6 +62,9 @@
     "report": "nyc report --reporter=html",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "generate-docs": "mos && node_modules/.bin/jsdoc --configure .jsdoc.js --verbose",
-    "examples": "node examples/index.js"
-  }
+    "examples": "node examples/index.js",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
+  },
+  "snyk": true
 }
