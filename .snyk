@@ -6,3 +6,21 @@ patch:
   SNYK-JS-LODASH-450202:
     - marpat > lodash:
         patched: '2019-10-17T14:26:05.265Z'
+    - snyk > @snyk/dep-graph > lodash:
+        patched: '2019-10-17T14:42:42.264Z'
+    - snyk > @snyk/dep-graph > graphlib > lodash:
+        patched: '2019-10-17T14:42:42.264Z'
+    - snyk > snyk-go-plugin > graphlib > lodash:
+        patched: '2019-10-17T14:42:42.264Z'
+    - snyk > snyk-nodejs-lockfile-parser > graphlib > lodash:
+        patched: '2019-10-17T14:42:42.264Z'
+    - snyk > @snyk/snyk-cocoapods-plugin > @snyk/dep-graph > lodash:
+        patched: '2019-10-17T14:42:42.264Z'
+    - snyk > snyk-nuget-plugin > dotnet-deps-parser > lodash:
+        patched: '2019-10-17T14:42:42.264Z'
+    - snyk > @snyk/snyk-cocoapods-plugin > @snyk/dep-graph > graphlib > lodash:
+        patched: '2019-10-17T14:42:42.264Z'
+    - snyk > @snyk/snyk-cocoapods-plugin > @snyk/cocoapods-lockfile-parser > @snyk/dep-graph > lodash:
+        patched: '2019-10-17T14:42:42.264Z'
+    - snyk > @snyk/snyk-cocoapods-plugin > @snyk/cocoapods-lockfile-parser > @snyk/dep-graph > graphlib > lodash:
+        patched: '2019-10-17T14:42:42.264Z'
