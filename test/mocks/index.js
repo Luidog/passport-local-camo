@@ -1,11 +1,14 @@
 'use strict';
 
+const path = require('path');
 const varium = require('varium');
 const environment = require('dotenv');
 const modelConstructor = require('../../index');
 
-environment.config({ path: './tests/.env' });
-varium(process.env, './tests/env.manifest');
+const manifestPath = path.join(__dirname, '../env.manifest');
+
+environment.config({ path: './test/.env' });
+varium({ manifestPath });
 
 const Account = modelConstructor({
   usernameKey: process.env.ACCOUNT_KEY,

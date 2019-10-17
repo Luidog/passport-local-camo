@@ -1,4 +1,4 @@
-/* global describe before beforeEach it */
+/* global describe before it */
 
 /* eslint-disable */
 
@@ -7,6 +7,7 @@ const { expect, should } = require('chai');
 
 /* eslint-enable */
 
+const path = require('path');
 const chai = require('chai');
 const chaiAsPromised = require('chai-as-promised');
 const environment = require('dotenv');
@@ -14,14 +15,16 @@ const varium = require('varium');
 const { connect } = require('marpat');
 const { User } = require('./mocks');
 
+const manifestPath = path.join(__dirname, './env.manifest');
+
 chai.use(chaiAsPromised);
 
 describe('Account Capabilities', () => {
   let database;
 
   before(done => {
-    environment.config({ path: './tests/.env' });
-    varium(process.env, './tests/env.manifest');
+    environment.config({ path: './test/.env' });
+    varium({ manifestPath });
     connect('nedb://memory')
       .then(db => {
         database = db;
@@ -73,8 +76,8 @@ describe('Account Capabilities', () => {
   });
   describe('Account Authentication Capabilities', function() {
     before(done => {
-      environment.config({ path: './tests/.env' });
-      varium(process.env, './tests/env.manifest');
+      environment.config({ path: './test/.env' });
+      varium({ manifestPath });
       connect('nedb://memory')
         .then(db => {
           database = db;

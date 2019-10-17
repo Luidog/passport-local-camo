@@ -7,6 +7,7 @@ const { expect, should } = require('chai');
 
 /* eslint-enable */
 
+const path = require('path');
 const chai = require('chai');
 const chaiAsPromised = require('chai-as-promised');
 const environment = require('dotenv');
@@ -14,14 +15,17 @@ const varium = require('varium');
 const { connect } = require('marpat');
 const { User } = require('./mocks');
 
+const manifestPath = path.join(__dirname, './env.manifest');
+
 chai.use(chaiAsPromised);
 
 describe('Storage Capabilities', () => {
-  let database, account;
+  let database;
+  let account;
 
   before(done => {
-    environment.config({ path: './tests/.env' });
-    varium(process.env, './tests/env.manifest');
+    environment.config({ path: './test/.env' });
+    varium({ manifestPath });
     connect('nedb://memory')
       .then(db => {
         database = db;
@@ -33,7 +37,7 @@ describe('Storage Capabilities', () => {
   });
 
   beforeEach(done => {
-    let user = {
+    const user = {
       role: process.env.ACCOUNT_ROLE
     };
 
