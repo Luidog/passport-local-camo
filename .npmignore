@@ -32,3 +32,4 @@ tests/
 .prettierrc.js
 docs
 CODE_OF_CONDUCT.md
+.nyc_output
