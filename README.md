@@ -111,7 +111,7 @@ Static methods are exposed on the schema. For example to use `register` function
 
 <!--@execute('npm run test',[])-->
 ```default
-> passport-local-marpat@3.0.0 test /Users/luidelaparra/Documents/Development/passport-local-marpat
+> passport-local-marpat@3.1.1 test /Users/luidelaparra/Documents/Development/passport-local-marpat
 > nyc _mocha --recursive  ./tests --timeout=30000 --exit
 
 
