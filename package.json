@@ -23,7 +23,7 @@
     "crypto-random-string": "^3.0.1",
     "marpat": "^3.0.0",
     "snyk": "^1.260.0",
-    "uuid": "^3.3.3"
+    "uuid": "^3.4.0"
   },
   "mos": {
     "plugins": [
