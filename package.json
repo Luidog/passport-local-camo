@@ -22,7 +22,7 @@
   "dependencies": {
     "crypto-random-string": "^3.0.1",
     "marpat": "^3.0.0",
-    "snyk": "^1.260.0",
+    "snyk": "^1.465.0",
     "uuid": "^3.3.3"
   },
   "mos": {
